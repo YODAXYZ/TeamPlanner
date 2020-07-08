@@ -1,0 +1,7 @@
+{% extends 'index.html' %}
+{% block title %} {{room.room_title}} {% endblock %}
+{% block content %}
+<h2>{{room.room_title}}</h2>
+<p>{{room.room_text}}</p>
+<em>{{room.pub_date}}</em>
+{% endblock %}
