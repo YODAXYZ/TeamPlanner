@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'room.apps.RoomConfig',
     'cell.apps.CellConfig',
     'desk.apps.DeskConfig',
+    'register.apps.RegisterConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
