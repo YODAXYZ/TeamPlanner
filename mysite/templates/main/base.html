@@ -1,88 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}Site{% endblock %}</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  	{% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-sm bg-light" id="menuheader">
-        <a class="navbar-brand" href="#">
-          <img src="img/logo.png" alt="Logo" class="logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="img/hamburger.jpg" class="navbar-toggler-icon">
-          </button>
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mr-auto">
-			<li class="nav-item">
-              <a class="nav-link" href="/">
-                Home
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Boards
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Board 1</a>
-                <a class="dropdown-item" href="#">Board 2</a>
-                <a class="dropdown-item highlighted" href="#">Create new board</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                Tasks
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Task 1</a>
-              </div>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-		  	<!--IF AUTHORIZED
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <img src="https://med-art.tomsk.ru/uploads/no-avatar.png" class="avatar">
-                kalim
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Log out</a>
-            </li>-->
-		  	<li class="nav-item">
-              <a class="nav-link" href="/login">
-                Log in
-              </a>
-            </li>
-			  <li class="nav-item">
-              <a class="nav-link" href="/register">
-                Sign up
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <div class="container">
-        <div id="content" name="content" class="main">
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <h1 class="mt-2">My Site</h1>
-                    <hr class="mt-0 mb-4">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}Site{% endblock %}</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-sm bg-light" id="menuheader">
+				<a class="navbar-brand" href="#">
+					<img src="img/logo.png" alt="Logo" class="logo">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<img src="img/hamburger.jpg" class="navbar-toggler-icon">
+				</button>
+				<!-- Links -->
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/">Home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Boards</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Board 1</a>
+								<a class="dropdown-item" href="#">Board 2</a>
+								<a class="dropdown-item highlighted" href="#">Create new board</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Tasks</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="#">Task 1</a>
+							</div>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<!--IF AUTHORIZED
+						<li class="nav-item">
+							<a class="nav-link" href="#">
+								<img src="https://med-art.tomsk.ru/uploads/no-avatar.png" class="avatar">
+								kalim
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Log out</a>
+						</li>-->
+						<li class="nav-item">
+							<a class="nav-link" href="/login">Log in</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/register">Sign up</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<div class="container">
+			<div id="content" name="content" class="main">
+				<div class="row justify-content-center">
+					<div class="col-8">
+						<h1 class="mt-2">My Site</h1>
+						<hr class="mt-0 mb-4">
+						{% block content %}
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
 </html>
