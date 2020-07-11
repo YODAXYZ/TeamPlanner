@@ -1,0 +1,55 @@
+@font-face {
+	font-family: 'Signika';
+	src: url('../fonts/Signika/Signika-SemiBold.ttf');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap
+}
+@font-face {
+	font-family: 'Fira Sans';
+	src: url('../fonts/Fira_Sans/FiraSans-SemiBold.ttf');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap
+}
+
+button {
+  outline: none!important
+}
+.logo {
+  height: 40px;
+  margin-right: 20px
+}
+#menuheader {
+  font-family: Signika;
+  padding-left: 60px;
+  padding-right: 60px;
+  border-bottom: 2px solid #D15641;
+	box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+}
+#menuheader .nav-link {
+  color: black
+}
+#menuheader .nav-link:hover {
+  color: #D15641
+}
+#menuheader .highlighted {
+  background: #D15641;
+  color: white
+}
+.avatar {
+  height: 30px;
+  border-radius: 50px;
+  margin-right:8px;
+  float: left;
+  margin-top: -3px;
+}
+.navbar-toggler {
+  padding: 0;
+}
+@media (max-width: 768px) {
+  #menuheader {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
