@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'boards/css/styles.css' %}" /> 
+    <!-- просто образец вставки css -->
     <title>{% block title %} TeamPlanner {% endblock %}</title>
 </head>
 <body>
