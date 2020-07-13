@@ -15334,7 +15334,7 @@ tinymce.create('tinymce.ui.Toolbar:tinymce.ui.Container', {
 
 				marker = dom.get('mce_marker');
 
-				// Scroll range into view scrollIntoView on element can't be used since it will scroll the main view port as well
+				// Scroll range into view scrollIntoView on element can't be used since it will scroll the account_pages view port as well
 				nodeRect = dom.getRect(marker);
 				viewPortRect = dom.getViewPort(editor.getWin());
 

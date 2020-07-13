@@ -5,6 +5,8 @@ from django.db import models
 class Task(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
+    pub_date = models.DateTimeField("Date of publication")
+    lead_time = models.DateTimeField("Date of publication")  # можно не заполнять
 
     def __str__(self):
         return self.title

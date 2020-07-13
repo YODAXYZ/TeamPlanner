@@ -18,13 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls),
     path('columns/', include('columns.urls')),
     path('boards/', include('boards.urls')),
     path('tasks/', include('tasks.urls')),
     path('register/', include('register.urls')),
-    path('', include('main.urls')),
+    path('', include('account_pages.urls')),
     path('', include('django.contrib.auth.urls')),
 ]
-
