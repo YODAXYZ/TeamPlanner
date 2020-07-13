@@ -1,0 +1,104 @@
+@font-face {
+	font-family: 'Signika';
+	src: url('../fonts/Signika/Signika-SemiBold.ttf');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap
+}
+@font-face {
+	font-family: 'Fira Sans';
+	src: url('../fonts/Fira_Sans/FiraSans-SemiBold.ttf');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap
+}
+@font-face {
+	font-family: 'Fira Sans';
+	src: url('../fonts/Fira_Sans/FiraSans-Regular.ttf');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap
+}
+body {
+    background-size: cover;
+    background: url('../img/back.jpg') no-repeat fixed;
+    font-family: Fira Sans;
+}
+button {
+  outline: none!important
+}
+textarea {
+    resize: none;
+}
+.logo {
+  height: 40px;
+  margin-right: 20px
+}
+header {
+    margin-bottom: 20px;
+}
+#content {
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+}
+#menuheader {
+    font-family: Signika;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-bottom: 2px solid #D15641;
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+    opacity: 0.9;
+    background: ghostwhite;
+}
+#menuheader:hover {
+    opacity: 1;
+}
+#menuheader .nav-link {
+  color: black
+}
+#menuheader .nav-link:hover {
+  color: #D15641
+}
+#menuheader .highlighted {
+  background: #D15641;
+  color: white
+}
+.avatar {
+  height: 30px;
+  border-radius: 50px;
+  margin-right:8px;
+  float: left;
+  margin-top: -3px;
+}
+.navbar-toggler {
+  padding: 0;
+}
+.modal-header {
+    border-bottom: 2px solid #8ECCD0;
+}
+.modal-header .close {
+    font-size: 30px;
+}
+.modal-footer {
+    border-top: none;
+}
+.primary-link {
+    color: #17a2b8;
+}
+.primary-link:hover {
+    color: #17a2b8;
+}
+.comment {
+    background: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top:10px;
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+}
+@media (max-width: 768px) {
+  #menuheader {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
