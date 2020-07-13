@@ -14,7 +14,7 @@ import os, sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(__file__);
+PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'boards.apps.BoardsConfig',
     'tasks.apps.TasksConfig',
-    'columns.apps.ColumnsConfig'
+    'columns.apps.ColumnsConfig',
     'register.apps.RegisterConfig',
     'crispy_forms',
 ]
