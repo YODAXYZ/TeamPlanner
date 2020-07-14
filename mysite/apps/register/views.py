@@ -9,7 +9,7 @@ def register(response):
         if form.is_valid():
             form.save()
 
-        return redirect("/home")
+        return redirect("/") # Что тут нужно выкидывать?
     else:
         form = RegisterForm()
 
