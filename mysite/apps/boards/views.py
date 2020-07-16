@@ -12,7 +12,6 @@ def index(request):
 
 
 def detail(request, board_id):
-    pass
     try:
         a = Board.objects.get(id=board_id)
     except:
