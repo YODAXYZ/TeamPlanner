@@ -4,6 +4,7 @@ from django.utils import timezone
 
 
 class Board(models.Model):
+
     board_title = models.CharField('Name of title', max_length=200)
     board_text = models.TextField('Some info')
     pub_date = models.DateTimeField("Date of publication")

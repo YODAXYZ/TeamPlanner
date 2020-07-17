@@ -47,21 +47,22 @@
 						{% endif %}
 					</ul>
 					<ul class="navbar-nav">
-						<!--IF AUTHORIZED
-						<li class="nav-item">
-							<a class="nav-link" href="#">
-								kalim
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Log out</a>
-						</li>-->
-						<li class="nav-item">
-							<a class="nav-link" href="/login">Log in</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/register">Sign up</a>
-						</li>
+						{% if user.is_authenticated %}
+								<li class="nav-item">
+									<a class="nav-link" href="/logout">Log out</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/">{{user.username}}</a>
+								<!-- Можно вместо Sign up отображать имя, а вместо Log in - Log out -->
+								</li>
+						{% else %}
+								<li class="nav-item">
+									<a class="nav-link" href="/login">Log in</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/register">Sign up</a>
+								</li>
+						{% endif %}
 					</ul>
 				</div>
 			</nav>
@@ -69,8 +70,10 @@
 
 		<div class="container">
 			<div id="content" name="content" class="main">
-				<h1 class="mt-2">My Site</h1>
-				<hr class="mt-0 mb-4">
+				{% if user.is_authenticated %}
+					<h1 class="mt-2">{{user.username}}</h1>
+					<hr class="mt-0 mb-4">
+				{% endif %}
 				{% block content %}
 				{% endblock %}
 			</div>
