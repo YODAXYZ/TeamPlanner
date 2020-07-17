@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.db import models
+from columns.models import Column
 
 
 class Task(models.Model):
+    column = models.ForeignKey(Column, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField("Date of publication")
@@ -17,7 +19,7 @@ class Task(models.Model):
 
 
 class Comment(models.Model):
-    article = models.ForeignKey(Task, on_delete=models.CASCADE)  # cascade удаленные комментарии к таску
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)  # cascade удаленные комментарии к таску
     author = models.CharField("Name of author", max_length=30)
     comment_text = models.CharField('Text of comment', max_length=200)
 

@@ -8,8 +8,12 @@ def register(response):
         form = RegisterForm(response.POST)
         if form.is_valid():
             form.save()
+<<<<<<< HEAD
 
         return redirect("/")
+=======
+            return redirect("/")  # Что тут нужно выкидывать?
+>>>>>>> 3c4707e3318c3ac16d73f54741bb2ea3f10215d4
     else:
         form = RegisterForm()
 

@@ -1,21 +1,20 @@
+from django.http.response import Http404
 from django.shortcuts import render
-
+from boards.models import Board
 
 def board_list(request):
     return render(request, 'index.html')
 
 
 def index(request):
-    pass
-    # room_list = Room.objects.order_by('pub_date')[:5]
-    # return render(request, 'room/list.html', {'room_list': room_list})
+    board_list = Board.objects.order_by('pub_date')[:5]
+    return render(request, 'boards/board_list.html', {'board_list': board_list})
 
 
-def detail(request, room_id):
-    pass
-    # try:
-    #     a = Room.objects.get(id=room_id)
-    # except:
-    #     raise Http404("404 error !!!")
-    #
-    # return render(request, 'room/detail.html', {'room': a})
+def detail(request, board_id):
+    try:
+        a = Board.objects.get(id=board_id)
+    except:
+        raise Http404("404 error !!!")
+
+    return render(request, 'board/detail.html', {'board': a})

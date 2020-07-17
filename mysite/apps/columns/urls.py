@@ -1,5 +1,17 @@
+from django.contrib import admin
 from django.urls import path
-from . import views
+from columns import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('create_column', views.create_column),
+    # path('show_column', views.show_column),  # наверное тут надо будет на страницу доски кидать
+    path('edit_column/<int:id>', views.edit_column),
+    path('update_column/<int:id>', views.update_column),
+    path('delete_column/<int:id>', views.delete_column),
+    path('create_task', views.create_task),
+    # path('show_task', views.show_task),  # наверное тут надо будет на страницу доски кидать
+    path('edit_task/<int:id>', views.edit_task),
+    path('update_task/<int:id>', views.update_task),
+    path('delete_task/<int:id>', views.delete_task),
 ]
