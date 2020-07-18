@@ -24,27 +24,27 @@
 						<li class="nav-item">
 							<a class="nav-link" href="/">Home</a>
 						</li>
-						<li class="nav-item dropdown">
+						{% if user.is_authenticated %}
+							<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropBoards" data-toggle="dropdown">Boards</a>
 							<div class="dropdown-menu">
-								{% if board_list %}
-								  	{% for board in board_list %}
-										<a class="dropdown-item" href="{% url 'boards:detail' board.id%}">{{board.board_title}}</a>
-								  	{% endfor %}
-							   	{% endif %}
-								<a class="dropdown-item highlighted" href="#">Create new board</a>
+								{% for board in board_list %}
+									<a class="dropdown-item" href="/{{board.id}}">{{board.board_title}}</a>
+								{% endfor %}
+								<a class="dropdown-item highlighted" href="/create_board">Create new board</a>
 							</div>
 						</li>
-						{% if task_list %}
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropTasks" data-toggle="dropdown">Tasks</a>
-								<div class="dropdown-menu">
-									{% for task in task_list %}
-										<a class="dropdown-item" href="{% url 'tasks:detail' task.id%}">{{task.title}}</a>
-									{% endfor %}
-								</div>
-							</li>
 						{% endif %}
+<!--						{% if task_list %}-->
+<!--							<li class="nav-item dropdown">-->
+<!--								<a class="nav-link dropdown-toggle" href="#" id="navbarDropTasks" data-toggle="dropdown">Tasks</a>-->
+<!--								<div class="dropdown-menu">-->
+<!--									{% for task in task_list %}-->
+<!--										<a class="dropdown-item" href="{% url 'tasks:detail' task.id%}">{{task.title}}</a>-->
+<!--									{% endfor %}-->
+<!--								</div>-->
+<!--							</li>-->
+<!--						{% endif %}-->
 					</ul>
 					<ul class="navbar-nav">
 						{% if user.is_authenticated %}

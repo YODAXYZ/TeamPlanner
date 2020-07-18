@@ -1,10 +1,10 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 {% block title %} Last {% endblock %}
 
 {% block content %}
    {% if board_list %}
       {% for a in board_list %}
-         <a href="{% url 'boards:detail' a.id%}">{{a.board_title}}</a>
+         <a href="{% url 'account_pages:detail' a.id%}">{{a.board_title}}</a>
 	<!-- возможно board:detail а не так, как выше -->
          <div></div>
       {% endfor %}
