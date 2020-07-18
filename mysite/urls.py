@@ -24,6 +24,7 @@ urlpatterns = [
     path('boards/', include('boards.urls')),
     path('tasks/', include('tasks.urls')),
     path('register/', include('register.urls')),
+    path('create_board/', include('account_pages.urls')),
     path('', include('account_pages.urls')),
     path('', include('django.contrib.auth.urls')),
 ]

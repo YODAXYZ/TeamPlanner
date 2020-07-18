@@ -1,6 +1,7 @@
 from django.http.response import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from boards.models import Board
+from .forms import BoardForm
 
 
 def main(request):
@@ -8,7 +9,14 @@ def main(request):
 
 
 def create_board(request):
-    return render(request, "account_pages/create_board.html", {})
+    if request.method == "POST":
+        form = BoardForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "account_pages/create_board.html", {"form": form})
+        else:
+            form = BoardForm()
+    return redirect("/")
 
 
 def board_list(request):
