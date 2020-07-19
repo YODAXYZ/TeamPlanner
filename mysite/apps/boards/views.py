@@ -8,5 +8,7 @@ def detail(request, board_id):
         a = Board.objects.get(id=board_id)
     except:
         raise Http404("404 error !!!")
-
-    return render(request, 'boards/detail.html', {'board': a})
+    if request.user.is_authenticated:
+        return render(request, 'boards/detail.html', {'board': a})
+    else:
+        return render(request, 'account_pages/home.html')
