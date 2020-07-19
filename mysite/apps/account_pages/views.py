@@ -10,13 +10,6 @@ def main(request):
 
 
 def create_board(request):
-    # if request.method == "POST":
-    #     form = BoardForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return render(request, "account_pages/create_board.html", {"form": form})
-    #     else:
-    #         form = BoardForm()
     if request.user.is_authenticated:
         form = BoardForm(request.POST)
         if form.is_valid():
@@ -24,8 +17,8 @@ def create_board(request):
             board.pub_date = timezone.now()
             board.user = request.user
             board.save()
-        return HttpResponseRedirect("/")
-    #     return render(request, "account_pages/create_board.html", {"form": form})
+        return redirect("/")
+        return render(request, "account_pages/create_board.html", {"form": form})
     else:
         return redirect("/login")
 

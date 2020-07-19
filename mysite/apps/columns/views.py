@@ -50,7 +50,7 @@ def create_task(request):
         if form.is_valid():
             try:
                 form.save()
-                return redirect('/') # не уверен, что тут вставлять
+                return redirect('/')  # не уверен, что тут вставлять
             except:
                 pass
     else:
