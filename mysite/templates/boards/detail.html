@@ -1,6 +1,13 @@
 {% extends "../account_pages/base.html" %}
 {% block title %} {{board.board_title}} {% endblock %}
 {% block content %}
-<h2>{{board.board_title}}</h2>
-<em>{{board.pub_date}}</em>
+    <h2>{{board.board_title}}</h2>
+    <em>{{board.pub_date}}</em>
+    <h1>Column:</h1>
+    {% for column in columns_list %}
+        <a class="dropdown-item" href="column/{{column.id}}">{{column.column_title}}</a>
+        <!--Сделать зачеркивание при нажатии на таск-->
+        <button><a href="">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
+        <button><a href="">Delete</a></button>
+    {% endfor %}
 {% endblock %}

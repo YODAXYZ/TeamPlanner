@@ -8,8 +8,8 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user = authenticate(request,
-                                username=form.cleaned_data['username'],
+            user = authenticate(request, username=form.cleaned_data['username'],
+
                                 password=form.cleaned_data['password1'],
                                 )
             login(request, user)

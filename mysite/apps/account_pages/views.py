@@ -1,13 +1,15 @@
 from django.http.response import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from boards.models import Board
+from columns.models import Column
 from .forms import BoardForm
 from django.utils import timezone
 
 
 def main(request):
     board_list = Board.objects.order_by('pub_date')
-    return render(request, 'account_pages/home.html', {'board_list': board_list})
+    column_list = Column.objects.all()
+    return render(request, 'account_pages/home.html', {'board_list': board_list, 'column_list': column_list})
 
 #
 # def create_board(request):
