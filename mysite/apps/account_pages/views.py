@@ -9,20 +9,20 @@ def main(request):
     board_list = Board.objects.order_by('pub_date')
     return render(request, 'account_pages/home.html', {'board_list': board_list})
 
-
-def create_board(request):
-    if request.user.is_authenticated:
-        form = BoardForm(request.POST)
-        if form.is_valid():
-            board = form.save(commit=False)
-            board.pub_date = timezone.now()
-            board.user = request.user
-            board.save()
-        return redirect("/")
-        return render(request, "account_pages/create_board.html", {"form": form})
-    else:
-        return redirect("/login")
-
+#
+# def create_board(request):
+#     if request.user.is_authenticated:
+#         form = BoardForm(request.POST)
+#         if form.is_valid():
+#             board = form.save(commit=False)
+#             board.pub_date = timezone.now()
+#             board.user = request.user
+#             board.save()
+#         return redirect("/")
+#         return render(request, "account_pages/create_board.html", {"form": form})
+#     else:
+#         return redirect("/login")
+#
 
 # def board_list(request):
 #     return render(request, 'index.html')
