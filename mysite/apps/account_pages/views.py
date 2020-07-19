@@ -6,17 +6,11 @@ from django.utils import timezone
 
 
 def main(request):
-    return render(request, 'account_pages/home.html')
+    board_list = Board.objects.order_by('pub_date')
+    return render(request, 'account_pages/home.html', {'board_list': board_list})
 
 
 def create_board(request):
-    # if request.method == "POST":
-    #     form = BoardForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return render(request, "account_pages/create_board.html", {"form": form})
-    #     else:
-    #         form = BoardForm()
     if request.user.is_authenticated:
         form = BoardForm(request.POST)
         if form.is_valid():

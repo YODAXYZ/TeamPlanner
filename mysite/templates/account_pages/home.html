@@ -2,4 +2,11 @@
 {% block title %} TeamPlanner {% endblock %}
 {% block content %}
      <h3>Welcome to the TeamPlanner!</h3>
+     {% if user.is_authenticated %}
+            {% for board in board_list %}
+                <a class="dropdown-item" href="boards/{{board.id}}">{{board.board_title}}</a>
+            {% endfor %}
+          </div>
+          </li>
+     {% endif %}
 {% endblock %}
