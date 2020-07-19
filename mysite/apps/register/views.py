@@ -12,9 +12,11 @@ def register(request):
                                 password=form.cleaned_data['password1'],
                                 )
             login(request, user)
-            return redirect("/")
+            form.save()
+
+        return redirect("/")
+
     else:
         form = RegisterForm()
-
     return render(request, "register/register.html", {"form": form})
 

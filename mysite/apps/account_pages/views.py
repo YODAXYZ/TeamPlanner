@@ -20,8 +20,8 @@ def create_board(request):
             board.pub_date = timezone.now()
             board.user = request.user
             board.save()
-        return HttpResponseRedirect("/")
-    #     return render(request, "account_pages/create_board.html", {"form": form})
+        return redirect("/")
+        return render(request, "account_pages/create_board.html", {"form": form})
     else:
         return redirect("/login")
 
