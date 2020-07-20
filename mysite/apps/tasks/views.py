@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from tasks.forms import CommentForm
-from tasks.models import Comment
+from tasks.forms import CommentForm, TaskForm
+from tasks.models import Comment, Task
+from django.utils import timezone
 
 
 def index(request):
@@ -9,23 +10,25 @@ def index(request):
     # return render(request, 'room/list.html', {'room_list': room_list})
 
 
-def create_comment(request):
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('/show_comment')
-            except:
-                pass
+def create_task(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = TaskForm(request.POST)
+            if form.is_valid():
+                task = form.save(commit=False)
+                task.pub_date = timezone.now()
+                task.user = request.user
+                # task.lead_time = timezone.now()
+                task.save()
+                # task_instance = Task.objects.create(author=request.user, title=form.data['title'], column=form.data['column'], pub_date=form.data['pub_date'])
+                # request.user.tasks.add(task)  # хз, как добавить в бд
+                # Task.objects.create(task)
+            return redirect("/")
+        else:
+            form = TaskForm()
+            return render(request, "tasks/create_task.html", {'form': form})
     else:
-        form = CommentForm()
-    return render(request, 'index.html', {'form': form})
-
-
-# def show(request):
-#     employees = Comment.objects.all()
-#     return render(request, "show.html", {'comments': comments})
+        return redirect("/login")
 
 
 def edit_comment(request, id):
