@@ -12,7 +12,22 @@
         <!--Сделать зачеркивание при нажатии на таск-->
         <button><a href="  ">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
         <button><a href="  ">Delete</a></button>
+     {% for task in column.task.all %}
+        <a class="dropdown-item" href="">{{task}} task</a>
+        <!--Сделать зачеркивание при нажатии на таск-->
+        <button><a href="  ">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
+        <button><a href="  ">Delete</a></button>
+        {% endfor %}
     {% endfor %}
+
+         {% for task in task_list.column.all %}
+            <a class="dropdown-item" href="">{{task}}</a>
+        <!--Сделать зачеркивание при нажатии на таск-->
+<!--        <button><a href="  ">Edit</a></button> &lt;!&ndash;Вместо кнопки сделать значок настройки&ndash;&gt;-->
+<!--        <button><a href="  ">Delete</a></button>-->
+
+
+         {% endfor %}
     <hr>
 
     <br>

@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .forms import ColumnForm
 from .models import Column
 from boards.models import Board
-# from columns.forms import TaskForm
 from tasks.models import Task
 
 
@@ -30,8 +29,9 @@ def detail(request, column_id, board_id):
     if request.user.is_authenticated:
         a = Column.objects.get(id=column_id)
         board = Board.objects.get(id=board_id)
+        task_list = Task.objects.get(board=board)
         if a in board.column.all():
-            task_list = Task.objects.filter(column=column_id)
+            # task_list = Task.objects.filter(column=column_id)
             return render(request, 'columns/detail.html', {'column': a, 'task_list': task_list})
         else:
             return render(request, "account_pages/warning.html")

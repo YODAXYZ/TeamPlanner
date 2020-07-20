@@ -39,9 +39,12 @@
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropTasks" data-toggle="dropdown">Tasks</a>
 								<div class="dropdown-menu">
-									{% for task in task_list %}
-										<a class="dropdown-item" href="{% url 'tasks:detail' task.id%}">{{task.title}}</a>
+								{% for column in board.column.all %}
+									{% for task in column.task.all %}
+									<a class="dropdown-item" href="">{{task}} task</a>
 									{% endfor %}
+								{% endfor %}
+								<a class="dropdown-item highlighted" href="/create_comment">Create new task</a>
 								</div>
 							</li>
 <!--						{% endif %}-->
