@@ -5,7 +5,7 @@ from columns import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('<int:column_id>/', views.detail, name='detail'),
-    path('create_column/', views.create_column),
+    path('', views.create_column, name="create_column"),
     # path('show_column', views.show_column),  # наверное тут надо будет на страницу доски кидать
     path('edit_column/<int:id>', views.edit_column),
     path('update_column/<int:id>', views.update_column),

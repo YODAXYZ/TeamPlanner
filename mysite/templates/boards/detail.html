@@ -6,10 +6,16 @@
 <!--    <h4>Columns:</h4>
                 По сути не особо нужно
                     имхо) -->
-    {% for column in columns_list %}
+    <hr>
+    {% for column in board.column.all %}
         <a class="dropdown-item" href="column/{{column.id}}">{{column.column_title}}</a>
         <!--Сделать зачеркивание при нажатии на таск-->
         <button><a href="  ">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
         <button><a href="  ">Delete</a></button>
     {% endfor %}
+    <hr>
+
+    <br>
+        <a class="nav-link" href="/create_column/{{board.id}}">Create new column</a>
+
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import ColumnForm
 from .models import Column
 from boards.models import Board
-from columns.forms import TaskForm
+# from columns.forms import TaskForm
 from tasks.models import Task
 
 
@@ -16,7 +16,8 @@ def create_column(request, board_id):
                 column.board = board
                 column.save()
                 board.column.add(column)
-            return redirect("/boards/<int:board_id>/")
+            # return render(request, "boards/detail.html", {"board_id" : board_id})
+            return redirect("/boards/<int:board_id>")
         else:
             form = ColumnForm()
         return render(request, "columns/create_column.html", {"form": form})
