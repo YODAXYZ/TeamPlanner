@@ -1,10 +1,10 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>New Column</h1>
+    <h1>New title for Column</h1>
     <form method="POST" class="post-form" >
         {% csrf_token %}
-        {{ form.as_p }}
+        {{form|crispy}}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}

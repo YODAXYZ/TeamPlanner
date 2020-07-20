@@ -14,9 +14,7 @@ def register(request):
                                 )
             login(request, user)
             form.save()
-
-        return redirect("/")
-
+            return render(request, "account_pages/base.html", {})
     else:
         form = RegisterForm()
     return render(request, "register/register.html", {"form": form})

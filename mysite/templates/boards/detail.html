@@ -2,12 +2,14 @@
 {% block title %} {{board.board_title}} {% endblock %}
 {% block content %}
     <h2>{{board.board_title}}</h2>
-    <em>{{board.pub_date}}</em>
-    <h1>Column:</h1>
+<!--    <em>{{board.pub_date}}</em>-->
+<!--    <h4>Columns:</h4>
+                По сути не особо нужно
+                    имхо) -->
     {% for column in columns_list %}
         <a class="dropdown-item" href="column/{{column.id}}">{{column.column_title}}</a>
         <!--Сделать зачеркивание при нажатии на таск-->
-        <button><a href="">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
-        <button><a href="">Delete</a></button>
+        <button><a href="  ">Edit</a></button> <!--Вместо кнопки сделать значок настройки-->
+        <button><a href="  ">Delete</a></button>
     {% endfor %}
 {% endblock %}

@@ -3,9 +3,8 @@
 
 {% block content %}
    {% if board_list %}
-      {% for a in board_list %}
+      {% for a in user.board.all %}
          <a href="{% url 'boards:detail' a.id%}">{{a.board_title}}</a>
-	<!-- возможно board:detail а не так, как выше -->
          <div></div>
       {% endfor %}
    {% endif %}

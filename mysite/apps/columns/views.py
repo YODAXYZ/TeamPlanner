@@ -1,27 +1,40 @@
 from django.shortcuts import render, redirect
-from columns.forms import ColumnForm
-from columns.models import Column
+from .forms import ColumnForm
+from .models import Column
+from boards.models import Board
 from columns.forms import TaskForm
 from tasks.models import Task
 
 
-def create_column(request):
-    if request.method == "POST":
-        form = ColumnForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('/')  # не уверен, что тут вставлять
-            except:
-                pass
+def create_column(request, board_id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            board = Board.objects.get(id=board_id)
+            form = ColumnForm(request.POST)
+            if form.is_valid():
+                column = form.save(commit=False)
+                column.board = board
+                column.save()
+                board.column.add(column)
+            return redirect("/boards/<int:board_id>/")
+        else:
+            form = ColumnForm()
+        return render(request, "columns/create_column.html", {"form": form})
     else:
-        form = ColumnForm()
-    return render(request, 'index.html', {'form': form})
+        return redirect("/login")
 
 
-# def show_column(request):
-#     columns = Column.objects.all()
-#     return render(request, "show.html", {'columns': columns})  # надо чем-то заменить
+def detail(request, column_id, board_id):
+    if request.user.is_authenticated:
+        a = Column.objects.get(id=column_id)
+        board = Board.objects.get(id=board_id)
+        if a in board.column.all():
+            task_list = Task.objects.filter(column=column_id)
+            return render(request, 'columns/detail.html', {'column': a, 'task_list': task_list})
+        else:
+            return render(request, "account_pages/warning.html")
+    else:
+        return redirect("/login")
 
 
 def edit_column(request, id):

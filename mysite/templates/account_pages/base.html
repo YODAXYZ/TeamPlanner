@@ -28,7 +28,7 @@
 							<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropBoards" data-toggle="dropdown">Boards</a>
 							<div class="dropdown-menu">
-								{% for board in board_list %}
+								{% for board in user.board.all %}
 									<a class="dropdown-item" href="boards/{{board.id}}">{{board.board_title}}</a>
 								{% endfor %}
 								<a class="dropdown-item highlighted" href="/create_board">Create new board</a>
@@ -51,10 +51,9 @@
 								<li class="nav-item">
 									<a class="nav-link" href="/logout">Log out</a>
 								</li>
-<!--								<li class="nav-item">-->
-<!--									<a class="nav-link" href="/">{{user.username}}</a>-->
-<!--								&lt;!&ndash; Можно вместо Sign up отображать имя, а вместо Log in - Log out &ndash;&gt;-->
-<!--								</li>-->
+								<li class="nav-item">
+									<a class="nav-link" href="/">{{user.username}}</a>
+								</li>
 						{% else %}
 								<li class="nav-item">
 									<a class="nav-link" href="/login">Log in</a>

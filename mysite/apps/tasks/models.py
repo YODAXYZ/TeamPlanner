@@ -4,11 +4,11 @@ from columns.models import Column
 
 
 class Task(models.Model):
-    column = models.ForeignKey(Column, on_delete=models.CASCADE)
+    column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name="task", null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField("Date of publication")
-    lead_time = models.DateTimeField("Date of publication")  # можно не заполнять
+    lead_time = models.DateTimeField("Date of assignment", null=True)  # можно не заполнять
 
     def __str__(self):
         return self.title
