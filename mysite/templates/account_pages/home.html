@@ -5,10 +5,10 @@
     {% if user.is_authenticated %}
         <h3>Your boards</h3>
         {% for board in user.board.all %}
-            <a class="dropdown-item" href="boards/{{board.id}}">{{board.board_title}}</a>
+            <a class="dropdown-item" href="{% url 'boards:detail' board.id%}">{{board.board_title}}</a>
         {% endfor %}
         <br>
-        <a class="nav-link" href="/create_board">Create new board</a>
+        <a class="nav-link" href="/boards/create_board">Create new board</a>
 
         {% else %}
             <h3>Welcome to the TeamPlanner!</h3>

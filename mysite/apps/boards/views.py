@@ -17,7 +17,8 @@ def detail(request, board_id):
             #     task_list.append(Task.objects.filter(column=column))
             task_list = Task.objects.all()
 
-            return render(request, 'boards/detail.html', {'board': a, 'columns_list': columns_list, 'task_list': task_list})
+            return render(request, 'boards/detail.html',
+                          {'board': a, 'columns_list': columns_list, 'task_list': task_list})
         else:
             return render(request, "account_pages/warning.html")
     else:
@@ -38,5 +39,18 @@ def create_board(request):
         else:
             form = BoardForm()
         return render(request, "boards/create_board.html", {"form": form})
+    else:
+        return redirect("/login")
+
+
+def delete_board(request, board_id):
+    #  как лучше рабоать с путями?
+    if request.user.is_authenticated:
+        a = Board.objects.get(id=board_id)
+        if a in request.user.board.all():
+            a.delete()
+            return redirect("/")
+        else:
+            return render(request, "account_pages/warning.html")
     else:
         return redirect("/login")

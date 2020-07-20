@@ -1,9 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'boards'
 urlpatterns = [
     path('<int:board_id>/', views.detail, name='detail'),
-    path('', views.create_board, name="create_board"),
+    path('<int:board_id>/columns/', include('columns.urls')),
+    path('delete_board/<int:board_id>/', views.delete_board, name='delete_board'),
+    path('create_board', views.create_board, name="create_board"),
     # path('leave_post/', views.leave_post, name='leave_post'),
 ]

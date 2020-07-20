@@ -24,8 +24,6 @@ urlpatterns = [
     path('columns/', include('columns.urls')),
     path('tasks/', include('tasks.urls')),
     path('register/', include('register.urls')),
-    path('create_board/', include('boards.urls')),
-    path('create_column/<int:board_id>/', include('columns.urls')),
     path('', include('account_pages.urls')),
     path('', include('django.contrib.auth.urls')),
 ]

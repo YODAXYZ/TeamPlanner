@@ -5,6 +5,18 @@ from boards.models import Board
 from tasks.models import Task
 
 
+def detail(request, column_id, board_id):
+    if request.user.is_authenticated:
+        a = Column.objects.get(id=column_id)
+        board = Board.objects.get(id=board_id)
+        if a in board.column.all():
+            return render(request, 'columns/detail.html', {'column': a})
+        else:
+            return render(request, "account_pages/warning.html")
+    else:
+        return redirect("/login")
+
+
 def create_column(request, board_id):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -25,14 +37,13 @@ def create_column(request, board_id):
         return redirect("/login")
 
 
-def detail(request, column_id, board_id):
+def delete_column(request, column_id, board_id):
     if request.user.is_authenticated:
         a = Column.objects.get(id=column_id)
         board = Board.objects.get(id=board_id)
-        task_list = Task.objects.get(board=board)
         if a in board.column.all():
-            # task_list = Task.objects.filter(column=column_id)
-            return render(request, 'columns/detail.html', {'column': a, 'task_list': task_list})
+            a.delete()
+            return redirect('/boards/{}'.format(board_id))
         else:
             return render(request, "account_pages/warning.html")
     else:
@@ -51,12 +62,6 @@ def update_column(request, id):
         form.save()
         return redirect("/")
     return render(request, 'edit.html', {'column': column})
-
-
-def delete_column(request, id):
-    column = Column.objects.get(id=id)
-    column.delete()
-    return redirect("/")
 
 
 def create_task(request):
