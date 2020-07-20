@@ -16,8 +16,9 @@ def create_column(request, board_id):
                 column.board = board
                 column.save()
                 board.column.add(column)
-            # return render(request, "boards/detail.html", {"board_id" : board_id})
-            return redirect("/boards/<int:board_id>")
+                # return redirect("/")
+                # return render(request, "/boards/detail.html", {"board_id" : board_id})
+                return redirect('/boards/{}'.format(board_id))
         else:
             form = ColumnForm()
         return render(request, "columns/create_column.html", {"form": form})
