@@ -3,12 +3,20 @@
 {% block content %}
 
     {% if user.is_authenticated %}
+        <p>
+            <a class="btn btn-primary" href="/boards/create_board">Create new board</a>
+        </p>
         <h3>Your boards</h3>
-        {% for board in user.board.all %}
-            <a class="dropdown-item" href="{% url 'boards:detail' board.id%}">{{board.board_title}}</a>
-        {% endfor %}
+        {% if user.board.all %}
+            {% for board in user.board.all %}
+                <a class="dropdown-item item-list" href="{% url 'boards:detail' board.id%}">{{board.board_title}}</a>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                Not Found. Create your first board!
+            </div>
+        {% endif %}
         <br>
-        <a class="nav-link" href="/boards/create_board">Create new board</a>
 
         {% else %}
             <h3>Welcome to the TeamPlanner!</h3>
