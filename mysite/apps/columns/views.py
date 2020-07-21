@@ -27,8 +27,6 @@ def create_column(request, board_id):
                 column.board = board
                 column.save()
                 board.column.add(column)
-                # return redirect("/")
-                # return render(request, "/boards/detail.html", {"board_id" : board_id})
                 return redirect('/boards/{}'.format(board_id))
         else:
             form = ColumnForm()
@@ -50,55 +48,23 @@ def delete_column(request, column_id, board_id):
         return redirect("/login")
 
 
-def edit_column(request, id):
-    column = Column.objects.get(id=id)
-    return render(request, 'edit.html', {'column': column})
-
-
-def update_column(request, id):
-    column = Column.objects.get(id=id)
-    form = ColumnForm(request.POST, instance=column)
-    if form.is_valid():
-        form.save()
-        return redirect("/")
-    return render(request, 'edit.html', {'column': column})
-
-
-def create_task(request):
-    if request.method == "POST":
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            try:
-                form.save()
-                return redirect('/')  # не уверен, что тут вставлять
-            except:
-                pass
+def edit_column(request, column_id, board_id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            column_prev = Column.objects.get(id=column_id)
+            board = Board.objects.get(id=board_id)
+            if column_prev in board.column.all():
+                form = ColumnForm(request.POST, instance=column_prev)
+                if form.is_valid():
+                    column = form.save(commit=False)
+                    column.save()
+                    # board.column.add(column)
+                    return redirect('/boards/{}'.format(board_id))
+            else:
+                return render(request, "account_pages/warning.html")
+        else:
+            form = ColumnForm()
+        return render(request, "columns/create_column.html", {"form": form})
     else:
-        form = TaskForm()
-    return render(request, 'index.html', {'form': form})
-
-
-# def show_task(request):
-#     tasks = Task.objects.all()
-#     return render(request, "show.html", {'tasks': tasks})
-
-
-def edit_task(request, id):
-    task = Task.objects.get(id=id)
-    return render(request, 'edit.html', {'task': task})
-
-
-def update_task(request, id):
-    task = Task.objects.get(id=id)
-    form = ColumnForm(request.POST, instance=task)
-    if form.is_valid():
-        form.save()
-        return redirect("/")
-    return render(request, 'edit.html', {'task': task})
-
-
-def delete_task(request, id):
-    task = Task.objects.get(id=id)
-    task.delete()
-    return redirect("/")
+        return redirect("/login")
 

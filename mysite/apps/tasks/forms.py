@@ -9,12 +9,8 @@ class CommentForm(forms.ModelForm):
         fields = ("author", "comment_text",)
 
 
-# class TaskForm(forms.ModelForm):
-#     class Meta:
-#         model = Task
-#         fields = ("title",)
-
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ("column", "title", "lead_time",)
+        fields = ("title", "lead_time",)
+        # fields = ("column", "title", "lead_time",)

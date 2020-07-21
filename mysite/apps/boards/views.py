@@ -54,3 +54,25 @@ def delete_board(request, board_id):
             return render(request, "account_pages/warning.html")
     else:
         return redirect("/login")
+
+
+def edit_board(request, board_id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            board_prev = Board.objects.get(id=board_id)
+            if board_prev in request.user.board.all():
+                form = BoardForm(request.POST, instance=board_prev)
+                if form.is_valid():
+                    board = form.save(commit=False)
+                    board.pub_date = timezone.now()
+                    board.save()
+                    # Нужно ли?
+                    # request.user.board.add(board)
+                return redirect('/boards/{}'.format(board_id))
+            else:
+                return render(request, "account_pages/warning.html")
+        else:
+            form = BoardForm()
+        return render(request, "boards/create_board.html", {"form": form})
+    else:
+        return redirect("/login")
