@@ -9,5 +9,4 @@ urlpatterns = [
     path('delete_board/<int:board_id>/', views.delete_board, name='delete_board'),
     path('create_board', views.create_board, name="create_board"),
     path('edit_board/<int:board_id>/', views.edit_board),
-    # path('leave_post/', views.leave_post, name='leave_post'),
 ]

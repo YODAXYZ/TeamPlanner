@@ -12,11 +12,7 @@ def detail(request, board_id):
         a = Board.objects.get(id=board_id)
         if a in request.user.board.all():
             columns_list = Column.objects.filter(board=board_id)
-            # task_list = list()
-            # for column in columns_list:
-            #     task_list.append(Task.objects.filter(column=column))
             task_list = Task.objects.all()
-
             return render(request, 'boards/detail.html',
                           {'board': a, 'columns_list': columns_list, 'task_list': task_list})
         else:
@@ -44,7 +40,6 @@ def create_board(request):
 
 
 def delete_board(request, board_id):
-    #  как лучше рабоать с путями?
     if request.user.is_authenticated:
         a = Board.objects.get(id=board_id)
         if a in request.user.board.all():

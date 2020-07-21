@@ -8,10 +8,3 @@ def main(request):
     column_list = Column.objects.all()
     return render(request, 'account_pages/home.html', {'board_list': board_list, 'column_list': column_list})
 
-# def board_list(request):
-#     return render(request, 'index.html')
-
-
-# def index(request):
-#     board_list = Board.objects.order_by('pub_date')
-#     return render(request, 'account_pages/board_list.html', {'board_list': board_list})
