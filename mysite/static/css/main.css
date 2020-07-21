@@ -96,6 +96,41 @@ header {
     margin-top:10px;
     box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
 }
+.item-list {
+    font-size: 18px;
+    padding: 10px
+}
+.settings-link {
+    font-size: 18px;
+    padding: 0;
+    color: #D15641;
+}
+.column-title {
+    color: #D15641;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: Signika;
+}
+.column-title:hover {
+    color: #D15641;;
+}
+.column-block {
+}
+.column-title-block {
+    cursor: pointer;
+    padding: 10px 20px;
+}
+.column-title-block:hover {
+    background: #EFEFEF;
+}
+.task-title {
+    padding-left:40px;
+    color: black;
+    font-size: 19px;
+    display: block;
+    font-family: Signika;
+    line-height: 35px;
+}
 @media (max-width: 768px) {
   #menuheader {
     padding-left: 20px;

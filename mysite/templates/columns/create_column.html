@@ -3,8 +3,7 @@
 {% block title %} Create new column {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-Create new column:
-    <hr>
+        <h4>Create new column:</h4>
         <form method="POST" class="form-group">
             {% csrf_token %}
 	        {{form|crispy}}
