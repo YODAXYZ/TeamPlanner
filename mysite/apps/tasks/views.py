@@ -24,6 +24,7 @@ def create_task(request, column_id, board_id):
                 # task.lead_time = ...
                 task.save()
                 column.task.add(task)
+                # request.user.task.add(task)
             return redirect('/boards/{}'.format(board_id))
         else:
             form = TaskForm()
@@ -51,7 +52,7 @@ def edit_task(request, task_id, column_id, board_id):
             task_prev = Task.objects.get(id=task_id)
             column = Column.objects.get(id=column_id)
             if task_prev in column.task.all():
-                form = TaskForm(request.POST, instance=task_prev)
+                form = TaskForm(request.POST, initial=vars(task_prev))
                 if request.user == task_prev.author:
                     if form.is_valid():
                         task = form.save(commit=False)

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http.response import Http404
 from django.shortcuts import render, redirect
 from boards.models import Board
@@ -51,6 +52,8 @@ def delete_board(request, board_id):
         return redirect("/login")
 
 
+#  добавить декораторы
+@login_required
 def edit_board(request, board_id):
     if request.user.is_authenticated:
         if request.method == "POST":
