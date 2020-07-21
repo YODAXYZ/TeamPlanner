@@ -115,12 +115,10 @@ header {
     color: #D15641;;
 }
 .column-block {
-    margin-bottom: 15px;
 }
 .column-title-block {
     cursor: pointer;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 10px 20px;
 }
 .column-title-block:hover {
     background: #EFEFEF;
@@ -131,6 +129,7 @@ header {
     font-size: 19px;
     display: block;
     font-family: Signika;
+    line-height: 35px;
 }
 @media (max-width: 768px) {
   #menuheader {

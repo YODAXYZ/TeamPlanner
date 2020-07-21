@@ -10,7 +10,7 @@
             <a class="btn btn-link settings-link" href="#" role="button" id="dropdownSettingsBoard" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-cog" aria-hidden="true"></i>
             </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-menu" aria-labelledby="dropdownSettingsBoard">
                 <a class="dropdown-item" href="/boards/edit_board/{{board.id}}">Edit board <i class="fa fa-pencil" aria-hidden="true"></i></a>
                 <a class="dropdown-item" href="/boards/delete_board/{{board.id}}">Delete board <i class="fa fa-trash" aria-hidden="true"></i></a>
             </div>
@@ -18,30 +18,35 @@
     </h2>
     {% for column in board.column.all %}
         <div class="column-block">
-            <div class="column-title-block">
-                <a class="column-title" href="columns/{{column.id}}/{{board.id}}">{{column.column_title}}</a>
+            <div class="column-title-block" data-toggle="collapse" aria-expanded="false" data-target="#multiCollapse{{column.id}}">
+                <a class="column-title" href="#">{{column.column_title}}</a>
                 <div class="dropdown show" style="display: inline-block;">
                     <a class="settings-link" href="#" role="button" id="dropdownSettingsColumn" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-cog" aria-hidden="true"></i>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu" aria-labelledby="dropdownSettingsColumn">
                         <a class="dropdown-item" href="#">Edit column <i class="fa fa-pencil" aria-hidden="true"></i></a>
                         <a class="dropdown-item" href="#">Delete column <i class="fa fa-trash" aria-hidden="true"></i></a>
-                        <a class="dropdown-item" href="tasks/create_task/{{column.id}}/{{board.id}}">Create new task <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                        <a class="dropdown-item" href="tasks/create_task/{{column.id}}/{{board.id}}">
+                            Create new task <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            {% for task in column.task.all %}
-                <a class="task-title" href="#" data-toggle="modal" data-target="#taskModal">{{task.title}}</a>
-                <!--<a class="dropdown-item" href="">Задача была создана:   {{task.author}}</a>
-                <a class="dropdown-item" href="">Дата создания: {{task.pub_date}}</a>
-                <a class="dropdown-item" href="">Срок сдачи: {{task.lead_time}}</a>-->
-                <!--Сделать зачеркивание при нажатии на таск-->
-                <!--<button><a href="tasks/edit_task/{{task.id}}/{{column.id}}/{{board.id}}">Edit task </a></button> Вместо кнопки сделать значок настройки
-                <button><a href="tasks/delete_task/{{task.id}}/{{column.id}}/{{board.id}}">Delete task</a></button>-->
-            {% endfor %}
+            <div class="collapse multi-collapse" id="multiCollapse{{column.id}}">
+                {% for task in column.task.all %}
+                    <a class="task-title" href="#"
+                       onclick="showTaskInfo({'title':'{{task.title}}', 'author':'{{task.author}}', 'pub_date':'{{task.pub_date}}', 'lead_time':'{{task.lead_time}}', 'work_id' : '{{task.id}}/{{column.id}}/{{board.id}}'})">
+                        {{task.title}}
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     {% endfor %}
+
+    {% load static %}
+    <script src="{% static 'js/taskInfo.js' %}"></script>
+
     <div id="taskModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -51,7 +56,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <h6 class="bg-info text-center text-light">до 21 июля 2020</h6>
+                <h6 class="bg-info text-center text-light lead_time">до 21 июля 2020</h6>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-8">
@@ -82,13 +87,26 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 </p>
                             </div>
+                            <br>
                         </div>
                         <div class="col-sm-4">
                             <h6>Участники</h6>
                             <a class="primary-link" href="#">@kalim</a><br>
                             <a class="primary-link" href="#">@login</a>
                             <hr>
-                            <a href="#" role="button" class="btn btn-danger">Удалить</a>
+                            <h6>Автор</h6>
+                            <p><a class="primary-link author" href="#">@kalim</a></p>
+                            <h6>Дата создания</h6>
+                            <p class="pub_date">16.06.2019</p>
+                            <hr>
+                            <p class="text-center">
+                                <a href="#" role="button" class="btn btn-link">Пометить как выполненное</a>
+                            </p>
+                            <hr>
+                            <p>
+                                <a href="#" role="button" class="btn btn-dark edit">Редактировать</a>
+                            </p>
+                            <a href="#" role="button" class="btn btn-danger delete">Удалить</a>
                         </div>
                     </div>
                 </div>
