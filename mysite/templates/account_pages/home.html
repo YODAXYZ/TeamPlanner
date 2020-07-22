@@ -19,7 +19,20 @@
         <br>
 
         {% else %}
-            <h3>Welcome to the TeamPlanner!</h3>
+            <h3 class="text-center">Welcome to the TeamPlanner!</h3>
+            <br>
+            <p class="text-center">
+                <img src="http://127.0.0.1:8000/static/img/logo.png">
+            </p>
+            <br>
+            <div class="row">
+                <div class="col-sm-6 text-center">
+                    <a href="/login" role="button" class="btn btn-primary" style="width:100%">Log in</a>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <a href="/register" role="button" class="btn btn-primary" style="width:100%">Sign up</a>
+                </div>
+            </div>
     {% endif %}
 
 {% endblock %}
