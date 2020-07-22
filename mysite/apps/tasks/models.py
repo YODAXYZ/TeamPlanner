@@ -5,8 +5,8 @@ from columns.models import Column
 
 class Task(models.Model):
     column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name="task", null=True)
-    # from django.contrib.auth.models import User
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    how_do_this = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="how_do")
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField("Date of publication")
     lead_time = models.DateTimeField("Date of assignment", null=True)  # можно не заполнять
@@ -18,6 +18,8 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+
+
 
 
 class Comment(models.Model):
