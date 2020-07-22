@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<header>
-			<nav class="navbar navbar-expand-sm" id="menuheader">
+			<nav class="navbar navbar-expand-sm main-padding" id="menuheader">
 				<a class="navbar-brand" href="#">
 					<img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
 				</a>
@@ -69,19 +69,22 @@
 				</div>
 			</nav>
 		</header>
-
-		<div class="container">
-			<div id="content" name="content" class="main">
-				{% if user.is_authenticated %}
-					<h1 class="mt-2">{{user.username}}</h1>
-					<hr class="mt-0">
-				{% endif %}
-				{% block content %}
-					<!-- For some staff -->
-				{% endblock %}
+		{% if not board %}
+			<div class="container">
+				<div id="content" name="content" class="main">
+					{% if user.is_authenticated %}
+						<h1 class="mt-2">{{user.username}}</h1>
+						<hr class="mt-0">
+					{% endif %}
+					{% block content %}
+						<!-- For some staff -->
+					{% endblock %}
+				</div>
 			</div>
-		</div>
-
+		{% else %}
+			{% block board %}
+			{% endblock %}
+		{% endif %}
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	</body>
