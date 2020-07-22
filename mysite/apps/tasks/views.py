@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.utils import timezone
 from tasks.forms import CommentForm, TaskForm
 from columns.models import Column
 from tasks.models import Comment, Task
-from django.utils import timezone
 
 
 def create_task(request, column_id, board_id):
@@ -78,3 +80,11 @@ def complete_task(request, task_id, column_id, board_id):
             return render(request, "account_pages/warning.html")
     else:
         return redirect("/login")
+
+
+@login_required
+def leave_comment(request, task_id, board_id):
+    task = Task.objects.get(id=task_id)
+    task.comment_set.create(author=request.user, comment_text=request.POST['text'])
+    # return HttpResponseRedirect(reverse('boards:detail', args=(board_id,)))
+
