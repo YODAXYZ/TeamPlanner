@@ -1,7 +1,7 @@
 @font-face {
-	font-family: 'Signika';
-	src: url('../fonts/Signika/Signika-SemiBold.ttf');
-	font-weight: 500;
+	font-family: 'OfficinaSans';
+	src: url('../fonts/OfficinaSans/OfficinaSansBold.otf');
+	font-weight: 600;
 	font-style: normal;
 	font-display: swap
 }
@@ -43,7 +43,7 @@ header {
     padding: 20px;
 }
 #menuheader {
-    font-family: Signika;
+    font-family: OfficinaSans;
     padding-left: 60px;
     padding-right: 60px;
     border-bottom: 2px solid #D15641;
@@ -109,7 +109,7 @@ header {
     color: #D15641;
     font-size: 22px;
     font-weight: 500;
-    font-family: Signika;
+    font-family: OfficinaSans;
 }
 .column-title:hover {
     color: #D15641;;
@@ -128,7 +128,7 @@ header {
     color: black;
     font-size: 19px;
     display: block;
-    font-family: Signika;
+    font-family: OfficinaSans;
     line-height: 35px;
 }
 @media (max-width: 768px) {
