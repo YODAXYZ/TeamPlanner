@@ -3,7 +3,7 @@
 {% block title %} Create new board {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h4>Create new task:</h4>
+    <h4>Create new/edit task:</h4>
         <form method="POST" class="form-group">
             {% csrf_token %}
 	        {{form|crispy}}
