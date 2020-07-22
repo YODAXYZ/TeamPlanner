@@ -5,12 +5,6 @@ from tasks.models import Comment, Task
 from django.utils import timezone
 
 
-def index(request):
-    pass
-    # room_list = Room.objects.order_by('pub_date')[:5]
-    # return render(request, 'room/list.html', {'room_list': room_list})
-
-
 def create_task(request, column_id, board_id):
     if request.user.is_authenticated:
         if request.method == "POST":
@@ -19,12 +13,10 @@ def create_task(request, column_id, board_id):
             if form.is_valid():
                 task = form.save(commit=False)
                 task.column = column
-                task.pub_date = timezone.now()
                 task.author = request.user
-                # task.lead_time = ...
+                task.pub_date = timezone.now()
                 task.save()
                 column.task.add(task)
-                # request.user.task.add(task)
             return redirect('/boards/{}'.format(board_id))
         else:
             form = TaskForm()
@@ -52,7 +44,7 @@ def edit_task(request, task_id, column_id, board_id):
             task_prev = Task.objects.get(id=task_id)
             column = Column.objects.get(id=column_id)
             if task_prev in column.task.all():
-                form = TaskForm(request.POST, initial=vars(task_prev))
+                form = TaskForm(request.POST, instance=task_prev)
                 if request.user == task_prev.author:
                     if form.is_valid():
                         task = form.save(commit=False)
@@ -65,7 +57,6 @@ def edit_task(request, task_id, column_id, board_id):
                     return redirect('/boards/{}'.format(board_id))
                 else:
                     return render(request, "account_pages/warning.html")
-
             else:
                 return render(request, "account_pages/warning.html")
         else:
@@ -75,16 +66,15 @@ def edit_task(request, task_id, column_id, board_id):
         return redirect("/login")
 
 
-# def update_comment(request, id):
-#     comment = Comment.objects.get(id=id)
-#     form = CommentForm(request.POST, instance=comment)
-#     if form.is_valid():
-#         form.save()
-#         return redirect("/show")
-#     return render(request, 'edit.html', {'comment': comment})
-#
-#
-# def delete_comment(request, id):
-#     comment = Comment.objects.get(id=id)
-#     comment.delete()
-#     return redirect("/show_comment")
+def complete_task(request, task_id, column_id, board_id):
+    if request.user.is_authenticated:
+        task = Task.objects.get(id=task_id)
+        column = Column.objects.get(id=column_id)
+        if task in column.task.all():
+            task.is_completed = True
+            task.save()
+            return redirect('/boards/{}'.format(board_id))
+        else:
+            return render(request, "account_pages/warning.html")
+    else:
+        return redirect("/login")

@@ -14,7 +14,7 @@ def register(request):
                                 )
             login(request, user)
             form.save()
-            return render(request, "account_pages/base.html", {})
+            return render(request, "account_pages/home.html", {})
     else:
         form = RegisterForm()
     return render(request, "register/register.html", {"form": form})

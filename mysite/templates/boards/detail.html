@@ -1,9 +1,6 @@
 {% extends "../account_pages/base.html" %}
 {% block title %} {{board.board_title}} {% endblock %}
 {% block content %}
-    <p>
-        <a class="btn btn-primary" href="/columns/create_column/{{board.id}}">Create new column</a>
-    </p>
     <h2>
         {{board.board_title}}
         <div class="dropdown show" style="display: inline-block;">
@@ -16,6 +13,9 @@
             </div>
         </div>
     </h2>
+    <p>
+        <a class="btn btn-primary" href="/columns/create_column/{{board.id}}">Create new column</a>
+    </p>
     {% for column in board.column.all %}
         <div class="column-block">
             <div class="column-title-block" data-toggle="collapse" aria-expanded="false" data-target="#multiCollapse{{column.id}}">
@@ -25,8 +25,8 @@
                         <i class="fa fa-cog" aria-hidden="true"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownSettingsColumn">
-                        <a class="dropdown-item" href="#">Edit column <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <a class="dropdown-item" href="#">Delete column <i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a class="dropdown-item" href="columns/edit_column/{{column.id}}/{{board.id}}">Edit column <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a class="dropdown-item" href="columns/delete_column/{{column.id}}/{{board.id}}">Delete column <i class="fa fa-trash" aria-hidden="true"></i></a>
                         <a class="dropdown-item" href="tasks/create_task/{{column.id}}/{{board.id}}">
                             Create new task <i class="fa fa-plus-circle" aria-hidden="true"></i>
                         </a>
@@ -39,6 +39,15 @@
                        onclick="showTaskInfo({'title':'{{task.title}}', 'author':'{{task.author}}', 'pub_date':'{{task.pub_date}}', 'lead_time':'{{task.lead_time}}', 'work_id' : '{{task.id}}/{{column.id}}/{{board.id}}'})">
                         {{task.title}}
                     </a>
+                    Выполнено ли: {{task.is_completed}}
+                    {% if task.is_completed %}
+                        <p>ВЫПОЛНЕНО</p>
+<!--                        Что-то сюда вставить можно или как-то использовать эту конструкцию-->
+                    {% else %}
+                        <p>НЕВЫПОЛНЕНО</p>
+                        <a href="tasks/complete_task/{{task.id}}/{{column.id}}/{{board.id}}" role="button" class="btn btn-link">Пометить как выполненное</a>
+                    {% endif %}
+
                 {% endfor %}
             </div>
         </div>
@@ -104,9 +113,9 @@
                             </p>
                             <hr>
                             <p>
-                                <a href="#" role="button" class="btn btn-dark edit">Редактировать</a>
+                                <a href="tasks/edit_task/{{task.id}}/{{column.id}}/{{board.id}}" role="button" class="btn btn-dark edit">Редактировать</a>
                             </p>
-                            <a href="#" role="button" class="btn btn-danger delete">Удалить</a>
+                            <a href="tasks/delete_task/{{task.id}}/{{column.id}}/{{board.id}}" role="button" class="btn btn-danger delete">Удалить</a>
                         </div>
                     </div>
                 </div>

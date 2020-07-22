@@ -10,6 +10,7 @@ class Task(models.Model):
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField("Date of publication")
     lead_time = models.DateTimeField("Date of assignment", null=True)  # можно не заполнять
+    is_completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
