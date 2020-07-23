@@ -40,7 +40,7 @@
                         description = (unescape('{{task.description}}'));
                     </script>
                         <a class="task-title {% if task.is_completed %}completed-task{% endif %}" href="#"
-                           onclick="showTaskInfo({'title': '{{ task.title|escape|linebreaks }}', 'author':'{{task.author}}',
+                           onclick="showTaskInfo({'title': '{{task.title}}', 'author':'{{task.author}}',
                            'pub_date':'{{task.pub_date}}', 'lead_time':'{{task.lead_time}}',
                            'work_id': '{{task.id}}/{{column.id}}/{{board.id}}', 'is_completed': '{{task.is_completed}}',
                            'description': description})">
