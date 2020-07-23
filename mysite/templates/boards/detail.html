@@ -53,7 +53,7 @@
                            onclick="showTaskInfo({'title': '{{task.title}}', 'author':'{{task.author}}',
                            'pub_date':'{{task.pub_date}}', 'lead_time':'{{task.lead_time}}',
                            'work_id': '{{task.id}}/{{column.id}}/{{board.id}}', 'is_completed': '{{task.is_completed}}',
-                           'description': '{{task.description}}'})">
+                           'description': '{{task.description}}', 'id_for_add_comments': '{{task.id}}/{{board.id}}'})">
                             {{task.title}}
                             <div class="task-date">до {{task.lead_time}}</div>
 
@@ -87,7 +87,7 @@
                             <p class="text-secondary description"></p>
                             <h6>Комментарии</h6>
                             <p>
-                                <form action="/tasks/leave_comment/{{task.id}}/{{board.id}}" class="form" method="post">
+                                <form action="" class="form comment-form" method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <textarea name="text" class="form-control" placeholder="Ваш комментарий" rows="3"></textarea>
