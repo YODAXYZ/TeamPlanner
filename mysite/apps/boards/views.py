@@ -1,6 +1,7 @@
 from boards.models import Board
 from columns.models import Column
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from tasks.models import Task
@@ -82,8 +83,11 @@ def invite_user(request, board_id):
             if form.is_valid():
                 board = Board.objects.get(id=board_id)
                 username = form.cleaned_data['username']
-                user = User.objects.get(username=username)
-                board.users.add(user.id)
+                try:
+                    user = User.objects.get(username=username)
+                    board.users.add(user.id)
+                except ObjectDoesNotExist:
+                    return render(request, "account_pages/no_such_user.html")
             return redirect('/boards/{}'.format(board_id))
         else:
             form = UserInvitationForm()
