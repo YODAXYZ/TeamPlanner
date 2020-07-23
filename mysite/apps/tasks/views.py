@@ -22,7 +22,7 @@ def create_task(request, column_id, board_id):
             return redirect('/boards/{}'.format(board_id))
         else:
             form = TaskForm()
-            return render(request, "tasks/create_task.html", {'form': form})
+        return render(request, "tasks/create_task.html", {'form': form})
     else:
         return redirect("/login")
 
@@ -86,5 +86,5 @@ def complete_task(request, task_id, column_id, board_id):
 def leave_comment(request, task_id, board_id):
     task = Task.objects.get(id=task_id)
     task.comment_set.create(author=request.user, comment_text=request.POST['text'])
-    # return HttpResponseRedirect(reverse('boards:detail', args=(board_id,)))
+    return redirect('/boards/{}'.format(board_id))
 

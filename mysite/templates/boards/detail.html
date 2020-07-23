@@ -17,7 +17,7 @@
                 </div>
             </div>
             <a class="btn btn-primary" href="/columns/create_column/{{board.id}}">Create new column</a>
-            <a class="btn btn-primary" href="/boards/invite_user/{{board.id}}/">Invite user to the board</a>
+            <a class="btn btn-primary" href="/boards/invite_user/{{board.id}}/">Add user to the board</a>
             <span style="font-size: 17px; font-weight: 400;padding-left: 20px">
                 <b>Members:</b>
                 {% for user in board.users.all %}
@@ -87,7 +87,7 @@
                             <p class="text-secondary description"></p>
                             <h6>Комментарии</h6>
                             <p>
-                                <form action="" class="form comment-form" method="post">
+                                <form action="leave_comment/{{task.id}}/{{board.id}}" class="form comment-form" method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <textarea name="text" class="form-control" placeholder="Ваш комментарий" rows="3"></textarea>
