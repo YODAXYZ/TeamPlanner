@@ -29,7 +29,7 @@
 							<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropBoards" data-toggle="dropdown">Boards</a>
 							<div class="dropdown-menu">
-								{% for board in user.board.all %}
+								{% for board in user.boards.all %}
 									<a class="dropdown-item" href="{% url 'boards:detail' board.id %}">{{board.board_title}}</a>
 								{% endfor %}
 								<a class="dropdown-item highlighted" href="/boards/create_board ">Create new board</a>
@@ -42,7 +42,7 @@
 								<div class="dropdown-menu">
 								{% for column in board.column.all %}
 									{% for task in column.task.all %}
-									<a class="dropdown-item" href="">{{task}} task</a>
+									<a class="dropdown-item" href="">{{task}}</a>
 									{% endfor %}
 								{% endfor %}
 								</div>
@@ -56,6 +56,7 @@
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="/">{{user.username}}</a>
+									<a>Your id: {{user.id}}</a>
 								</li>
 						{% else %}
 								<li class="nav-item">

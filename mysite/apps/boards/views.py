@@ -1,21 +1,21 @@
-from django.contrib.auth.decorators import login_required
-from django.http.response import Http404
-from django.shortcuts import render, redirect
 from boards.models import Board
 from columns.models import Column
-from tasks.models import Task
-from .forms import BoardForm
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.utils import timezone
+from tasks.models import Task
+
+from .forms import BoardForm, UserInvitationForm
 
 
 def detail(request, board_id):
     if request.user.is_authenticated:
-        a = Board.objects.get(id=board_id)
-        if a in request.user.board.all():
+        board = Board.objects.get(id=board_id)
+        if request.user in board.users.all():
             columns_list = Column.objects.filter(board=board_id)
             task_list = Task.objects.all()
             return render(request, 'boards/detail.html',
-                          {'board': a, 'columns_list': columns_list, 'task_list': task_list})
+                          {'board': board, 'columns_list': columns_list, 'task_list': task_list})
         else:
             return render(request, "account_pages/warning.html")
     else:
@@ -29,9 +29,8 @@ def create_board(request):
             if form.is_valid():
                 board = form.save(commit=False)
                 board.pub_date = timezone.now()
-                board.user = request.user
                 board.save()
-                request.user.board.add(board)
+                board.users.add(request.user)
             return redirect("/")
         else:
             form = BoardForm()
@@ -42,9 +41,9 @@ def create_board(request):
 
 def delete_board(request, board_id):
     if request.user.is_authenticated:
-        a = Board.objects.get(id=board_id)
-        if a in request.user.board.all():
-            a.delete()
+        board = Board.objects.get(id=board_id)
+        if request.user in board.users.all():
+            board.delete()
             return redirect("/")
         else:
             return render(request, "account_pages/warning.html")
@@ -53,12 +52,12 @@ def delete_board(request, board_id):
 
 
 #  добавить декораторы
-@login_required
+# @login_required
 def edit_board(request, board_id):
     if request.user.is_authenticated:
         if request.method == "POST":
             board_prev = Board.objects.get(id=board_id)
-            if board_prev in request.user.board.all():
+            if request.user in board_prev.users.all():
                 form = BoardForm(request.POST, instance=board_prev)
                 if form.is_valid():
                     board = form.save(commit=False)
@@ -72,5 +71,24 @@ def edit_board(request, board_id):
         else:
             form = BoardForm()
         return render(request, "boards/create_board.html", {"form": form})
+    else:
+        return redirect("/login")
+
+
+def invite_user(request, board_id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = UserInvitationForm(request.POST)
+            if form.is_valid():
+                user_id = form.cleaned_data['user_id']
+                board = Board.objects.get(id=board_id)
+                user = User.objects.filter(id=user_id)
+                # user.save()
+                board.save()
+                board.users.add(user_id)
+            return redirect('/boards/{}'.format(board_id))
+        else:
+            form = UserInvitationForm()
+        return render(request, "boards/invite_user.html", {"form": form})
     else:
         return redirect("/login")

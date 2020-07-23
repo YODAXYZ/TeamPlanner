@@ -7,8 +7,8 @@
             <a class="btn btn-primary" href="/boards/create_board">Create new board</a>
         </p>
         <h3>Your boards</h3>
-        {% if user.board.all %}
-            {% for board in user.board.all %}
+        {% if user.boards %}
+            {% for board in user.boards.all %}
                 <a class="dropdown-item item-list" href="{% url 'boards:detail' board.id%}">{{board.board_title}}</a>
             {% endfor %}
         {% else %}

@@ -4,7 +4,7 @@ from columns.models import Column
 
 
 class Task(models.Model):
-    column = models.ForeignKey(Column, on_delete=models.CASCADE,related_name="task", null=True)
+    column = models.ForeignKey(Column, on_delete=models.CASCADE, related_name="task", null=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     how_do_this = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="how_do")
     title = models.CharField(max_length=200)

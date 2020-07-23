@@ -14,6 +14,11 @@
                 </div>
             </div>
             <a class="btn btn-primary" href="/columns/create_column/{{board.id}}">Create new column</a>
+            <a class="btn btn-primary" href="/boards/invite_user/{{board.id}}/">Invite user to the board</a>
+            <a>Members: </a>
+                {% for member in board.users.all %}
+                    {{member.username}}
+                {% endfor %}
         </h3>
     </div>
     <div class="columns-block main-padding">
@@ -77,27 +82,15 @@
                                         <textarea name="text" class="form-control" placeholder="Ваш комментарий" rows="3"></textarea>
                                     </div>
                                     <div class="text-right">
-<!--                                        <a href="tasks/leave_comment/{{task.id}}/{{board.id}}"><input type="submit"  class="btn btn-primary"></a>-->
+<!--                                          <a href="tasks/leave_comment/{{task.id}}/{{board.id}}"><input type="submit"  class="btn btn-primary"></a>-->
                                         <button type="submit"></button>
                                     </div>
                                 </form>
                             </p>
-                            <div class="comment">
-                                <h6><a href="#" class="primary-link">@kalim</a></h6>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </p>
-                            </div>
-                            <div class="comment">
-                                <h6><a href="#" class="primary-link">@login</a></h6>
-                                <p class="text-secondary">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </p>
-                            </div>
                         </div>
                         <div class="col-sm-4">
                             <h6>Автор</h6>
-                            <p><a class="primary-link author" href="#">@kalim</a></p>
+                            <p><a class="primary-link author" href="#"></a></p>
                             <h6>Дата создания</h6>
                             <p class="pub_date">16.06.2019</p>
                             <hr>

@@ -13,4 +13,3 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ("title", "description", "lead_time",)
-        # fields = ("column", "title", "lead_time",)
