@@ -9,4 +9,4 @@ class BoardForm(forms.ModelForm):
 
 
 class UserInvitationForm(forms.Form):
-    user_id = forms.IntegerField(label='ID of the user you want to invite')
+    username = forms.CharField(label='Name of the user you want to invite:')

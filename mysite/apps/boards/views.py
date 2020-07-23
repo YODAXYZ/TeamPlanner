@@ -80,12 +80,12 @@ def invite_user(request, board_id):
         if request.method == "POST":
             form = UserInvitationForm(request.POST)
             if form.is_valid():
-                user_id = form.cleaned_data['user_id']
+                username = form.cleaned_data['username']
                 board = Board.objects.get(id=board_id)
-                user = User.objects.filter(id=user_id)
+                user = User.objects.filter(username=username)
                 # user.save()
                 board.save()
-                board.users.add(user_id)
+                board.users.add(user.id)
             return redirect('/boards/{}'.format(board_id))
         else:
             form = UserInvitationForm()

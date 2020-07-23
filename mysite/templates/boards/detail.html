@@ -20,8 +20,8 @@
             <a class="btn btn-primary" href="/boards/invite_user/{{board.id}}/">Invite user to the board</a>
             <span style="font-size: 17px; font-weight: 400;padding-left: 20px">
                 <b>Members:</b>
-                {% for member in board.users.all %}
-                    {{member.username}}
+                {% for user in board.users.all %}
+                    {{user.username}}
                 {% endfor %}
             </span>
         </h3>
@@ -56,6 +56,10 @@
                            'description': '{{task.description}}'})">
                             {{task.title}}
                             <div class="task-date">до {{task.lead_time}}</div>
+
+<!--                            <a href="/tasks/leave_comment/{{task.id}}/{{board.id}}" role="button" class="btn btn-info btn-new-task">Дуфму сщььуте-->
+<!--                            </a>-->
+
                         </a>
                     {% endfor %}
                     <a href="tasks/create_task/{{column.id}}/{{board.id}}" role="button" class="btn btn-info btn-new-task">Create new task</a>
