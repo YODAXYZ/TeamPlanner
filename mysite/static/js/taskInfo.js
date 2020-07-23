@@ -1,5 +1,6 @@
 function showTaskInfo(parameters) {
     $('#taskModal .modal-title').html(parameters.title);
+    $('#taskModal .description').html(parameters.description);
     $('#taskModal .author').html("@" + parameters.author);
     $('#taskModal .pub_date').html(parameters.pub_date);
     $('#taskModal .lead_time').html("до " + parameters.lead_time);
