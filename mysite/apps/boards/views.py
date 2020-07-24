@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from boards.models import Board
@@ -68,12 +69,13 @@ def invite_user(request, board_id):
     if request.method == "POST":
         form = UserInvitationForm(request.POST)
         if form.is_valid():
-            user_id = form.cleaned_data['user_id']
             board = Board.objects.get(id=board_id)
-            user = User.objects.filter(id=user_id)
-            # user.save()
-            board.save()
-            board.users.add(user_id)
+            username = form.cleaned_data['username']
+            try:
+                user = User.objects.get(username=username)
+                board.users.add(user.id)
+            except ObjectDoesNotExist:
+                return render(request, "account_pages/no_such_user.html")
         return redirect('/boards/{}'.format(board_id))
     else:
         form = UserInvitationForm()

@@ -22,7 +22,7 @@ class Task(models.Model):
 
 
 class Comment(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)  # cascade удаленные комментарии к таску
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comment', null=True)  # cascade удаленные комментарии к таску
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     comment_text = models.CharField('Text of comment', max_length=200)
 
